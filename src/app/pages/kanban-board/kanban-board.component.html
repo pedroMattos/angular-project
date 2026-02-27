@@ -1,0 +1,109 @@
+<div class="kanban-board p-6 bg-gray-50 min-h-screen">
+  <app-header></app-header>
+
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+    <div class="flex flex-col sm:flex-row gap-4">
+      <app-search-bar class="flex-1"></app-search-bar>
+      <app-filters></app-filters>
+    </div>
+  </div>
+
+  <div cdkDropListGroup class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="kanban-column">
+      <div class="column-header bg-red-50 border-t-4 border-red-400 rounded-t-lg p-4">
+        <h2 class="font-semibold text-gray-900 flex justify-between items-center">
+          <span>A Fazer</span>
+          <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-sm">
+            {{ taskService.taskCounts().todo }}
+          </span>
+        </h2>
+      </div>
+      
+      <div 
+        cdkDropList
+        [cdkDropListData]="taskService.todoTasks()"
+        class="column-content bg-white border-x border-b border-gray-200 rounded-b-lg min-h-96 p-4"
+        (cdkDropListDropped)="drop($event)">
+        
+        @for (task of taskService.todoTasks(); track task.id) {
+          <div cdkDrag>
+            <app-task-card
+              [task]="task"
+              (edit)="editTask($event)"
+              (delete)="confirmDeleteTask($event)">
+            </app-task-card>
+          </div>
+        } @empty {
+          <app-empty-state></app-empty-state>
+        }
+      </div>
+    </div>
+
+    <div class="kanban-column">
+      <div class="column-header bg-yellow-50 border-t-4 border-yellow-400 rounded-t-lg p-4">
+        <h2 class="font-semibold text-gray-900 flex justify-between items-center">
+          <span>Em Progresso</span>
+          <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-sm">
+            {{ taskService.taskCounts().doing }}
+          </span>
+        </h2>
+      </div>
+      
+      <div 
+        cdkDropList
+        [cdkDropListData]="taskService.doingTasks()"
+        class="column-content bg-white border-x border-b border-gray-200 rounded-b-lg min-h-96 p-4"
+        (cdkDropListDropped)="drop($event)">
+        
+        @for (task of taskService.doingTasks(); track task.id) {
+          <div cdkDrag>
+            <app-task-card
+              [task]="task"
+              (edit)="editTask($event)"
+              (delete)="confirmDeleteTask($event)">
+            </app-task-card>
+          </div>
+        } @empty {
+          <app-empty-state></app-empty-state>
+        }
+      </div>
+    </div>
+
+    <div class="kanban-column">
+      <div class="column-header bg-green-50 border-t-4 border-green-400 rounded-t-lg p-4">
+        <h2 class="font-semibold text-gray-900 flex justify-between items-center">
+          <span>Concluído</span>
+          <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">
+            {{ taskService.taskCounts().done }}
+          </span>
+        </h2>
+      </div>
+      
+      <div 
+        cdkDropList
+        [cdkDropListData]="taskService.doneTasks()"
+        class="column-content bg-white border-x border-b border-gray-200 rounded-b-lg min-h-96 p-4"
+        (cdkDropListDropped)="drop($event)">
+        
+        @for (task of taskService.doneTasks(); track task.id) {
+          <div cdkDrag>
+            <app-task-card
+              [task]="task"
+              (edit)="editTask($event)"
+              (delete)="confirmDeleteTask($event)">
+            </app-task-card>
+          </div>
+        } @empty {
+          <app-empty-state></app-empty-state>
+        }
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<app-delete-modal
+  [task]="taskToDelete()"
+  (confirm)="onDeleteConfirm($event)"
+  (cancel)="onDeleteCancel()">
+</app-delete-modal>

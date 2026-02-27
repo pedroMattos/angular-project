@@ -1,0 +1,6 @@
+<input
+  type="text"
+  placeholder="Buscar por título ou descrição..."
+  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+  [value]="taskService.filters().search"
+  (input)="onSearchChange($event)">

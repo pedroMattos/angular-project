@@ -1,0 +1,31 @@
+.kanban-column {
+  min-height: 500px;
+}
+
+.column-content {
+  transition: background-color 0.2s ease;
+}
+
+.cdk-drop-list-dragging .column-content {
+  background-color: #f8fafc;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: rotate(5deg);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+  height: 80px;
+  background: #e5e7eb;
+  border: 2px dashed #9ca3af;
+  margin: 12px 0;
+  border-radius: 8px;
+}
+
+.cdk-drag-animating {
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
