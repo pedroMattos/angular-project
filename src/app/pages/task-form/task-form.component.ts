@@ -35,9 +35,9 @@ export class TaskFormComponent implements OnInit {
   private taskId: string | null = null;
 
   protected readonly taskForm = this.fb.group({
-    titulo: ['', [Validators.required, Validators.minLength(3)]],
-    descricao: ['', [Validators.maxLength(500)]],
-    prioridade: ['', Validators.required],
+    title: ['', [Validators.required, Validators.minLength(3)]],
+    description: ['', [Validators.maxLength(500)]],
+    priority: ['', Validators.required],
     status: ['todo']
   });
 
@@ -56,9 +56,9 @@ export class TaskFormComponent implements OnInit {
     const task = this.taskService.getTaskById(this.taskId);
     if (task) {
       this.taskForm.patchValue({
-        titulo: task.titulo,
-        descricao: task.descricao || '',
-        prioridade: task.prioridade,
+        title: task.title,
+        description: task.description || '',
+        priority: task.priority,
         status: task.status
       });
     } else {
@@ -77,9 +77,9 @@ export class TaskFormComponent implements OnInit {
 
     const formValue = this.taskForm.value;
     const taskData = {
-      titulo: formValue.titulo!,
-      descricao: formValue.descricao || undefined,
-      prioridade: formValue.prioridade as TaskPriority,
+      title: formValue.title!,
+      description: formValue.description || undefined,
+      priority: formValue.priority as TaskPriority,
       status: formValue.status as TaskStatus
     };
 
@@ -117,7 +117,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   getDescriptionLength(): number {
-    return this.taskForm.get('descricao')?.value?.length || 0;
+    return this.taskForm.get('description')?.value?.length || 0;
   }
 
   private markAllFieldsAsTouched(): void {

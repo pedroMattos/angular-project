@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task, TaskPriority } from '../../models/task.model';
+import { TrashIconComponent } from '../icons/trash-icon/trash-icon.component';
 
 @Component({
   selector: 'app-task-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TrashIconComponent],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css'
 })

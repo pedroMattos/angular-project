@@ -1,59 +1,71 @@
-# Teste
+# Mini Kanban de Tarefas
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.5.
+Uma aplicação 100% frontend desenvolvida em Angular 21+ com foco em arquitetura moderna e uso de Signals.
 
-## Development server
+## 🚀 Funcionalidades
 
-To start a local development server, run:
+### Quadro Kanban
+- **Três colunas**: A Fazer, Em Progresso, Concluído
+- **Drag and Drop**: Mova tarefas entre colunas arrastando
+- **Contador de tarefas**: Visualize quantas tarefas há em cada coluna
 
+### Gerenciamento de Tarefas
+- **Criar nova tarefa** com título, descrição, priority e status
+- **Editar tarefa** existente (clique na tarefa)
+- **Excluir tarefa** com confirmação (botão de lixeira)
+- **Alterar status** movendo entre colunas ou editando
+
+### Busca e Filtros
+- **Campo de busca** por título ou descrição
+- **Filtro por priority** (Alta, Média, Baixa)
+- **Limpar filtros** para resetar a visualização
+
+### Persistência
+- **localStorage**: Dados permanecem após refresh do navegador
+- **Estado centralizado**: Gerenciado por service com Signals
+
+## 🛠 Tecnologias Utilizadas
+
+- **Angular 21+** - Framework principal
+- **Standalone Components** - Sem NgModules
+- **Angular Signals** - Gerenciamento de estado reativo
+- **Angular Control Flow** - @if, @for, @switch
+- **Reactive Forms** - Formulários com validação
+- **Angular CDK** - Drag and Drop
+- **TailwindCSS** - Estilização
+- **TypeScript** - Linguagem de desenvolvimento
+
+## 🎯 Rotas
+
+- `/board` - Quadro Kanban principal
+- `/new` - Criar nova tarefa
+- `/task/:id` - Editar tarefa existente
+
+## ⚡ Instalação e Execução
+
+### Pré-requisitos
+- Node.js 18+ 
+- npm ou yarn
+
+### Instalação
 ```bash
-ng serve
+# Clone o repositório
+git clone https://github.com/pedroMattos/angular-project.git
+cd angular-project
+
+# Instale as dependências
+npm install
+
+# Execute o servidor de desenvolvimento
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Acesse a aplicação
+Abra seu navegador e navegue para `http://localhost:4200/`
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🔧 Scripts Disponíveis
 
 ```bash
-ng generate --help
+# Servidor de desenvolvimento
+npm start
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

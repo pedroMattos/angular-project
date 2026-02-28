@@ -8,21 +8,21 @@ export class TaskService {
   private readonly STORAGE_KEY = 'kanban-tasks';
   
   private _tasks = signal<Task[]>(this.loadFromStorage());
-  private _filters = signal<TaskFilters>({ search: '', prioridade: undefined });
+  private _filters = signal<TaskFilters>({ search: '', priority: undefined });
 
   readonly tasks = this._tasks.asReadonly();
   readonly filters = this._filters.asReadonly();
 
   readonly filteredTasks = computed(() => {
     const tasks = this._tasks();
-    const { search, prioridade } = this._filters();
+    const { search, priority } = this._filters();
     
     return tasks.filter(task => {
       const matchesSearch = !search || 
-        task.titulo.toLowerCase().includes(search.toLowerCase()) ||
-        task.descricao?.toLowerCase().includes(search.toLowerCase());
+        task.title.toLowerCase().includes(search.toLowerCase()) ||
+        task.description?.toLowerCase().includes(search.toLowerCase());
       
-      const matchesPriority = !prioridade || task.prioridade === prioridade;
+      const matchesPriority = !priority || task.priority === priority;
       
       return matchesSearch && matchesPriority;
     });
@@ -52,18 +52,18 @@ export class TaskService {
     });
   }
 
-  createTask(taskData: Omit<Task, 'id' | 'dataCriacao'>): Task {
+  createTask(taskData: Omit<Task, 'id' | 'createdAt'>): Task {
     const newTask: Task = {
       ...taskData,
       id: this.generateId(),
-      dataCriacao: new Date()
+      createdAt: new Date()
     };
     
     this._tasks.update(tasks => [...tasks, newTask]);
     return newTask;
   }
 
-  updateTask(id: string, updates: Partial<Omit<Task, 'id' | 'dataCriacao'>>): boolean {
+  updateTask(id: string, updates: Partial<Omit<Task, 'id' | 'createdAt'>>): boolean {
     const taskIndex = this._tasks().findIndex(task => task.id === id);
     if (taskIndex === -1) return false;
 
@@ -94,7 +94,7 @@ export class TaskService {
   }
 
   clearFilters(): void {
-    this._filters.set({ search: '', prioridade: undefined });
+    this._filters.set({ search: '', priority: undefined });
   }
 
   private generateId(): string {
@@ -109,7 +109,7 @@ export class TaskService {
       const parsed = JSON.parse(stored);
       return parsed.map((task: any) => ({
         ...task,
-        dataCriacao: new Date(task.dataCriacao)
+        createdAt: new Date(task.createdAt)
       }));
     } catch {
       return [];

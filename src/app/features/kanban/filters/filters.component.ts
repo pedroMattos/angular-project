@@ -13,15 +13,15 @@ export class FiltersComponent {
 
   onPriorityFilterChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    const prioridade = target.value || undefined;
+    const priority = target.value || undefined;
     this.taskService.updateFilters({ 
-      prioridade: prioridade as any
+      priority: priority as any
     });
   }
 
   hasActiveFilters(): boolean {
     const filters = this.taskService.filters();
-    return !!(filters.search || filters.prioridade);
+    return !!(filters.search || filters.priority);
   }
 
   clearFilters(): void {
